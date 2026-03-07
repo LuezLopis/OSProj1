@@ -1,2 +1,8 @@
 3/5 4:01 pm
-- Created and connected the project git repository to GitHub, and starting to understand the project 
+- Created and connected the project git repository to GitHub, and started to understand the project 
+3/6 10.26 am
+- decided to work on the project using Python as it's the language that I'm least comfortable with, and I want to practice.
+- I will lay the groundwork for the logger, with just a function that takes in a response and prints it into the format.
+- Choose to use the datetime function to obtain the date and time for the logger's output.
+6:41
+- Starting to work on the encryptor, thinking just to do a basic if-else/case function to deal with the encryption commands
