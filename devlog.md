@@ -25,4 +25,7 @@
 - now continuing on the password action function
 - finished driver side of password function, has pipes to logger and read and write from encryptor
 - pausing on the driver side of the program to work on the logger, i forgot to setup the pipelines for the driver to communicate with the logger
+- The log file pipe reading and file writing is very similar to how things worked in Unix and C++ piping and file writing, tho the flexible type casting is different
+- ok for now, the log is hooked up to output the logs to the terminal, not a file for now
+- 
 - finishing the encryptor again
