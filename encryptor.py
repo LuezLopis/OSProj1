@@ -31,7 +31,7 @@ class Encryptor:
         pklst = self.pk.split
         size = len(self.pk)
         newpw = ''
-        for i, char in enumerate(password):
+        for i, char in enumerate(item):
             shift = (((ord(pklst[i%size]))-64 - ord(char)-64))
             if shift < 0:
                 shift += 26
