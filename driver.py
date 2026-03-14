@@ -72,6 +72,10 @@ class Driver:
                 if self.logger: # cleans up the pipe before ending the program
                     self.logger.stdin.close()
                     self.logger.terminate()
+                if self.encryptor:
+                    self.encryptor.stdin.close()
+                    self.encryptor.stdout.close()
+                    self.encryptor.terminate()
                 break
             elif action == "PASSWORD":
                 self.password()
@@ -197,7 +201,7 @@ if __name__ == "__main__": # how program runs from the command line prompt
         driver.mainRun()
     except KeyboardInterrupt:
         print("\n Program Interruption")
-        driver.log("PROGRAM INTERRUPTED")
+        driver.log("[ERROR] PROGRAM INTERRUPTED")
     finally:# clean up
         if driver.logger:
             driver.logger.terminate()
