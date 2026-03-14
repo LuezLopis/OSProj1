@@ -65,4 +65,53 @@ class driver:
 
             action = input("Enter Command: ").strip().upper()
 
+            if action == "QUIT":
+                self.log("ENDING PROGRAM")
+                break
+            elif action == "PASSWORD":
+                self.selpass()
+            elif action == "INCRYPT":
+                self.encrypt()
+            elif action == "DECRYPT":
+                self.decrypt()
+            elif action == "HISTORY":
+                self.history()
+            else:
+                print("Incorrect option")
+                self.log(f"INVALID COMMMAND: {action}")
+
+    def histAccess(self, prompt):
+        # allows for access the history for passwords
+        while True:
+            print(f"\n{prompt}")
+            print("0 for new password string \n Else use Nums for specific past strings")
+            
+            for i, past in enumerate(self.hist, 1): # start the emnumaration at 1
+                print(f"{i} for {past}")
+            print(f" From 1 to {len(self.hist)}, {len(self.hist)+1} to Cancel")
+            
+            try: 
+                action = int(input("Choice: ")) # turns input into a int only
+                
+                if action == 0:
+                    newpass = input("New Password (No spaces): ")
+                    if newpass.isalpha():
+                        return newpass
+                    else:
+                        print("Only Letters is allowed for Password")
+            
+                elif action > 0 & action <= len(self.hist):
+                    return self.hist[action-1]
+            
+                elif action == len(self.hist)+1:
+                    return None
+                
+                else:
+                    print("Invalid Choice")
+
+            except ValueError:
+                print("Thats not an int pls try again")
+        
+
+
     
