@@ -2,7 +2,7 @@ import subprocess
 import sys
 import os
 
-class driver:
+class Driver:
     def __init__(self, logFile):
         self.hist = [] # will hold the current history of our commands
         self.logFile = logFile
