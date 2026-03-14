@@ -1,6 +1,6 @@
 
-def encryption(action, ):
+#def encryption(action, ):
 
 
 
-def encryptCommand():
+#def encryptCommand():
