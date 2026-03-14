@@ -24,7 +24,7 @@ if __name__ == "__main__": # for logger testing by itself
     
     logFile = sys.argv[1] # sets the logFile to argument 1
 
-    logger = Logger()        
+    logger = Logger(logFile)        
     
     # Read from stdin and log each line
     while True:
