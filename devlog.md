@@ -18,4 +18,9 @@
 - can;t combine the two functions due to the need for a return functiin for the out but not realy for the in w/o causing other issue.
 - add upper case for the case insensitivity cuz bigg letters a cooler
 - saving all progress now to prevent past issue of progress loss
+- Gonna enumrate the hist for easy numbering, very clean and compact, 
+- can't really use an if statement to check if the input is a num
+- solution: try statement with exception catching
+- added isaphla for letters only for the password
+- now continuing on the password action function
 - finishing the encryptor again
