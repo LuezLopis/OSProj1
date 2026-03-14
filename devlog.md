@@ -24,5 +24,5 @@
 - added isaphla for letters only for the password
 - now continuing on the password action function
 - finished driver side of password function, has pipes to logger and read and write from encryptor
-- 
+- pausing on the driver side of the program to work on the logger, i forgot to setup the pipelines for the driver to communicate with the logger
 - finishing the encryptor again
