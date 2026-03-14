@@ -15,7 +15,7 @@ class Driver:
     def init(self):
         # prepares the pipes for the logger
         self.logger = subprocess.Popen(
-            ['./logger', self.logFile],
+            ['python', 'logger.py', self.logFile],
             stdin = subprocess.PIPE,
             stdout = subprocess.PIPE,
             stderr = subprocess.PIPE,
