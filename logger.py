@@ -5,11 +5,11 @@ import os
 
 class Logger:
     def log(self, log, file):
-        with open(logFile, "a", encoding="utf-8") as file: # to prevent overwriting every entry
+        with open(file, "a", encoding="utf-8") as f: # to prevent overwriting every entry
             currDate = dt.datetime.now()
             yr, mon, day, hr, mins, _, _, _, _ = currDate.timetuple()
-            file.write(f"{yr}-{mon:02d}-{day:02d} {hr:02d}:{mins:02d} [{log}]\n")
-            sys.stdout.flush() 
+            f.write(f"{yr}-{mon:02d}-{day:02d} {hr:02d}:{mins:02d} [{log}]\n")
+            #sys.stdout.flush() 
 
     #wday, month, day, clock, year = currentTime
     #print(f"{year}-{month}-{day} {clock}")
