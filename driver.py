@@ -135,7 +135,7 @@ class Driver:
         response = self.incrypt()
         print(response)
 
-        self.log(response)
+        #self.hist.append(response)
         
 
         self.log("[SET] Password Set")
@@ -145,8 +145,43 @@ class Driver:
         for line in self.hist:
             print(line)
 
-    #def encrypt():
+    def encrypt(self):
+        self.log("[SELECTION] Selecting Password")
+        
+        print("Select what u want to Encrypt")
+        eword = self.selpass()
 
+        if eword is None:
+            return   
+        
+        self.hist.append(eword)
+
+        self.outcrypt(f"ENCRYPT {eword}")
+        response = self.incrypt()
+        print(response)
+        if "ERROR" in response:    
+            self.log(f"[ERROR] {response}")
+        else:
+            self.log("[RESULT] Encrytion successful")
+
+    def decrypt(self):
+        self.log("[SELECTION] Selecting string")
+        
+        print("Select what u want to Decrypt")
+        dword = self.selpass()
+
+        if dword is None:
+            return   
+        
+        self.hist.append(dword)
+
+        self.outcrypt(f"DECRYPT {dword}")
+        response = self.incrypt()
+        print(response)
+        if "ERROR" in response:    
+            self.log(f"[ERROR] {response}")
+        else:
+            self.log("[RESULT] Decrytion successful")
 
 if __name__ == "__main__": # how program runs from the command line prompt 
     
