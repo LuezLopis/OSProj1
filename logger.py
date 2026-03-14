@@ -19,6 +19,19 @@ if __name__ == "__main__":
     
     logFile = sys.argv[1] # sets the logFile to argument 1
 
-    logger()
+    logger = Logger()
+    
+    # Read from stdin and log each line
+    while True:
+        try:
+            line = sys.stdin.readline()
+            if not line: #if its the end of the file
+                break
+            logger.log(line) #else logs the message
 
+        except KeyboardInterrupt:
+            break
+        except Exception as e:
+            print(f"Logger Error: {e}", file = sys.stderr)
+ 
     
