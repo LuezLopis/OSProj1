@@ -15,30 +15,43 @@ class Encryptor:
     def encrypt(self, password):
         if self.pk is None:
             return "ERROR PassKey not set"
-        pklst = self.pk.split
+        
+        pkstr = self.pk
         size = len(self.pk)
         newpw = ''
+        
         for i, char in enumerate(password):
-            shift = (((ord(pklst[i%size]))-64 + ord(char)-64))
+            keypos = (ord(pkstr[i % size])) - ord('A') + 1
+            pwpos =  ord(char)- ord('A') + 1
+            shift = keypos + pwpos
+            
             if shift > 26:
                 shift -= 26
-            newpw+=chr(shift)
+            newpw+=chr(shift + ord('A') - 1)
+        
         return f"RESULT {newpw}"
     
     def decrypt(self, item):
         if self.pk is None:
             return "ERROR PassKey not set"
-        pklst = self.pk.split
+        
+        pkstr = self.pk
         size = len(self.pk)
         newpw = ''
+        
         for i, char in enumerate(item):
-            shift = (((ord(pklst[i%size]))-64 - ord(char)-64))
-            if shift < 0:
+            keypos = (ord(pkstr[i % size])) - ord('A') + 1
+            itpos =  ord(char)- ord('A') + 1
+            shift =  itpos - keypos
+            
+            if shift < 1:
                 shift += 26
-            newpw+=chr(shift)
+            newpw+=chr(shift + ord('A') - 1)
+        
         return f"RESULT {newpw}"
         
     def cmd(self, action):
+        action.upper()
         a = action.split()
 
         if a[0] == "PASSKEY":
@@ -67,8 +80,7 @@ def main():
             if response:
                 print(response)
                 sys.stdout.flush()
-            if response == "QUIT":    
-                break # Ends after one command prompt
+            break # Ends after one command prompt
 
         except KeyboardInterrupt:
             break
