@@ -9,7 +9,7 @@
 3/8 readded
 - researching how to use Python subprocess
 - continuing on the encryptor
-3/13
+3/13 readded
 - due to an unexpected crash, progress was lost, decided to work on it again tmw
 3/14
 - finishing the encryptor again
