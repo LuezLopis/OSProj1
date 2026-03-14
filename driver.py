@@ -42,13 +42,13 @@ class driver:
             self.logger.stdin.write(message +'\n') #this the logger activation
             self.logger.stdin.flush() # imediate send
 
-    def incrypt(self, action):
+    def outcrypt(self, action):
         # this is a write to encrypt
         if self.encrypt.stdin:
             self.encrypt.stdin.write(action +'\n') #this the logger activation
             self.encrypt.stdin.flush()
                 
-    def outcrypt(self):        
+    def incrypt(self):        
         # this is a read from encrypt
         if self.encrypt.stdout:
             return self.encrypt.stdout.readline().strip() #this the logger activation
@@ -69,7 +69,7 @@ class driver:
                 self.log("ENDING PROGRAM")
                 break
             elif action == "PASSWORD":
-                self.selpass()
+                self.password()
             elif action == "INCRYPT":
                 self.encrypt()
             elif action == "DECRYPT":
@@ -80,10 +80,9 @@ class driver:
                 print("Incorrect option")
                 self.log(f"INVALID COMMMAND: {action}")
 
-    def histAccess(self, prompt):
+    def selpass(self):
         # allows for access the history for passwords
         while True:
-            print(f"\n{prompt}")
             print("0 for new password string \n Else use Nums for specific past strings")
             
             for i, past in enumerate(self.hist, 1): # start the emnumaration at 1
@@ -111,7 +110,19 @@ class driver:
 
             except ValueError:
                 print("Thats not an int pls try again")
-        
 
+    def password(self):
+        self.log("PASSWORD COMMAND")
 
-    
+        print("Select what u want the Password to be")
+        pword = self.selpass()
+
+        if pword is None:
+            return
+        #senting down the outpipe to the encryptor
+        self.outcrypt(f"PASSKEY {pword}")
+
+        response = self.incrypt()
+        print(response)
+
+        self.log(response)
