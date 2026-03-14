@@ -1,22 +1,80 @@
 import subprocess
+import sys
+import os
 
 class Encryptor:
-    
-    def outcrypt(self, action):
-        a = action.split()
-        if a[0] is "PASSKEY":
-            self.setKey(a[1])
-            self.incrypt(1)
-        if a[0] is "ENCRYPT":
-            self.encrypt()
-
-    def incrypt(self, reponse):
-        if reponse == 1:
-            return "Passkey is Set"
+    def __init__(self):
+        self.pk = None
 
     def setKey(self, pk):
-        self.pk = pk
-        self.log("[SET] Passkey Set")
+        self.pk = pk.upper()
+        print(f"Input: PASSKEY {pk}")
+        #self.log("[RESULT] Passkey Set")
+        return f"Output: RESULT"
+    
+    def encrypt(self, password):
+        if self.pk is None:
+            return "ERROR PassKey not set"
+        pklst = self.pk.split
+        size = len(self.pk)
+        newpw = ''
+        for i, char in enumerate(password):
+            shift = (((ord(pklst[i%size]))-64 + ord(char)-64))
+            if shift > 26:
+                shift -= 26
+            newpw+=chr(shift)
+        return f"RESULT {newpw}"
+    
+    def decrypt(self, item):
+        if self.pk is None:
+            return "ERROR PassKey not set"
+        pklst = self.pk.split
+        size = len(self.pk)
+        newpw = ''
+        for i, char in enumerate(password):
+            shift = (((ord(pklst[i%size]))-64 - ord(char)-64))
+            if shift < 0:
+                shift += 26
+            newpw+=chr(shift)
+        return f"RESULT {newpw}"
         
-    #def encrypt(self):
+    def cmd(self, action):
+        a = action.split()
+
+        if a[0] == "PASSKEY":
+            return self.setKey(a[1])
+        elif a[0] == "ENCRYPT":
+            return self.encrypt(a[1])
+        elif a[0] == "DECRYPT":
+            return self.decrypt(a[1])
+        elif a[0] == "QUIT":
+            return "QUIT"
+
+
+def main():
+    encryptor = Encryptor()        
+    
+    # Read from stdin and log each line
+    while True:
+        try:
+            line = sys.stdin.readline()
+            if not line: #if its the end of the file
+                break
+
+            #command processing
+            response = encryptor.cmd(line) # takes in the action
         
+            if response:
+                print(response)
+                sys.stdout.flush()
+            if response == "QUIT":    
+                break # Ends after one command prompt
+
+        except KeyboardInterrupt:
+            break
+        except Exception as e:
+            print(f"Logger Error: {e}", file = sys.stderr)
+            sys.stdout.flush()
+
+if __name__ == "__main__": #on cmd name call of this function
+    main()
