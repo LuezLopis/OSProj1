@@ -6,3 +6,10 @@
 - Choose to use the datetime function to obtain the date and time for the logger's output.
 6:41
 - Starting to work on the encryptor, thinking just to do a basic if-else/case function to deal with the encryption commands
+3/8 readded
+- researching how to use Python subprocess
+- continuing on the encryptor
+3/13
+- due to an unexpected crash, progress was lost, decided to work on it again tmw
+3/14
+- finishing the encryptor again
