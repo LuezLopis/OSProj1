@@ -12,4 +12,5 @@
 3/13 readded
 - due to an unexpected crash, progress was lost, decided to work on it again tmw
 3/14
+- think that all the beginning stuff, like starting up the logger, will be a single initial function in the driver program
 - finishing the encryptor again
