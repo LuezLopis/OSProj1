@@ -205,3 +205,5 @@ if __name__ == "__main__": # how program runs from the command line prompt
     finally:# clean up
         if driver.logger:
             driver.logger.terminate()
+        if driver.encryptor:
+            driver.encryptor.terminate()
