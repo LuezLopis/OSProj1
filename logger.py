@@ -11,7 +11,7 @@ class Logger:
         with open(self.logFile, "a", encoding="utf-8") as f: # to prevent overwriting every entry
             currDate = dt.datetime.now()
             yr, mon, day, hr, mins, _, _, _, _ = currDate.timetuple()
-            f.write(f"{yr}-{mon:02d}-{day:02d} {hr:02d}:{mins:02d} [{log}]\n")
+            f.write(f"{yr}-{mon:02d}-{day:02d} {hr:02d}:{mins:02d} {log}\n")
             #sys.stdout.flush() 
 
     #wday, month, day, clock, year = currentTime
