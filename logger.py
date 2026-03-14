@@ -4,11 +4,13 @@ import sys
 import os
 
 class Logger:
-    def log(self, log):
-        currDate = dt.datetime.now()
-        yr, mon, day, hr, mins, _, _, _, _ = currDate.timetuple()
-        print(f"{yr}-{mon:02d}-{day:02d} {hr:02d}:{mins:02d} [{log}]")
-        sys.stdout.flush() 
+    def log(self, log, file):
+        with open(logFile, "a", encoding="utf-8") as file: # to prevent overwriting every entry
+            currDate = dt.datetime.now()
+            yr, mon, day, hr, mins, _, _, _, _ = currDate.timetuple()
+            file.write(f"{yr}-{mon:02d}-{day:02d} {hr:02d}:{mins:02d} [{log}]\n")
+            sys.stdout.flush() 
+
     #wday, month, day, clock, year = currentTime
     #print(f"{year}-{month}-{day} {clock}")
 
@@ -19,7 +21,7 @@ if __name__ == "__main__":
     
     logFile = sys.argv[1] # sets the logFile to argument 1
 
-    logger = Logger()
+    logger = Logger()        
     
     # Read from stdin and log each line
     while True:
@@ -28,6 +30,8 @@ if __name__ == "__main__":
             if not line: #if its the end of the file
                 break
             logger.log(line) #else logs the message
+        
+
 
         except KeyboardInterrupt:
             break
