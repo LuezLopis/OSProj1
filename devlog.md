@@ -13,4 +13,9 @@
 - due to an unexpected crash, progress was lost, decided to work on it again tmw
 3/14
 - think that all the beginning stuff, like starting up the logger, will be a single initial function in the driver program
+- maybe a good idea to merge all pipe interactions together, like all logger log work in one def and all encrypt reads and write in another.
+- add an extra parameter to the encrypt communication to allow for type, in or out
+- can;t combine the two functions due to the need for a return functiin for the out but not realy for the in w/o causing other issue.
+- add upper case for the case insensitivity cuz bigg letters a cooler
+- saving all progress now to prevent past issue of progress loss
 - finishing the encryptor again
