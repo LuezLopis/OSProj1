@@ -24,8 +24,8 @@ class Driver:
 
         if self.logger.poll() is not None:
             raise Exception("Logger failed to start")
-        """
-        self.encrypt = subprocess.Popen(
+        
+        self.encryptor = subprocess.Popen(
             ['./encryptor'],
             stdin = subprocess.PIPE,
             stdout = subprocess.PIPE,
@@ -33,28 +33,28 @@ class Driver:
             text = True
         )
 
-        if self.encrypt.poll() is not None:
+        if self.encryptor.poll() is not None:
             raise Exception("Encryptor failed to start")
-        """
-        self.encrypt = None # temp for logger testing
+        
+        #self.encrypt = None # temp for logger testing
         
     def log(self, message):
         #pipes the messages to the logger
         if self.logger.stdin:
-            self.logger.stdin.write(message +'\n') #this the logger activation
+            self.logger.stdin.write(message) #this the logger activation
             self.logger.stdin.flush() # imediate send
 
     def outcrypt(self, action):
         # this is a write to encrypt
-        if self.encrypt.stdin:
-            self.encrypt.stdin.write(action +'\n') #this the logger activation
-            self.encrypt.stdin.flush()
+        if self.encryptor.stdin:
+            self.encryptor.stdin.write(action) #this the encryptor activation
+            self.encryptor.stdin.flush()
                 
     def incrypt(self):        
         # this is a read from encrypt
-        if self.encrypt.stdout and self.encrypt:
-            return self.encrypt.stdout.readline().strip() #this the logger activation
-        return "Place holder for logger testing" #None
+        if self.encryptor.stdout and self.encryptor:
+            return self.encryptor.stdout.readline().strip() #this the logger activation
+        return None
 
     def mainRun(self):
         while True:
@@ -125,10 +125,10 @@ class Driver:
         if pword is None:
             return
         
-        self.hist.append(pword)
+        #self.hist.append(pword)
 
         print(f"Password is {pword}")
-        """
+        
         #senting down the outpipe to the encryptor
         self.outcrypt(f"PASSKEY {pword}")
 
@@ -136,7 +136,7 @@ class Driver:
         print(response)
 
         self.log(response)
-        """
+        
 
         self.log("[SET] Password Set")
 
