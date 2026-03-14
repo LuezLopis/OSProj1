@@ -14,7 +14,7 @@ class Driver:
 
     def init(self):
         # prepares the pipes for the logger
-        self.logger = subprocess.popen(
+        self.logger = subprocess.Popen(
             ['./logger', self.logFile],
             stdin = subprocess.PIPE,
             stdout = subprocess.PIPE,
@@ -24,9 +24,9 @@ class Driver:
 
         if self.logger.poll() is not None:
             raise Exception("Logger failed to start")
-        
-        self.encrypt = subprocess.popen(
-            ['./logger', self.logFile],
+        """
+        self.encrypt = subprocess.Popen(
+            ['./encryptor'],
             stdin = subprocess.PIPE,
             stdout = subprocess.PIPE,
             stderr = subprocess.PIPE,
@@ -35,6 +35,8 @@ class Driver:
 
         if self.encrypt.poll() is not None:
             raise Exception("Encryptor failed to start")
+        """
+        self.encrypt = None # temp for logger testing
         
     def log(self, message):
         #pipes the messages to the logger
@@ -44,21 +46,21 @@ class Driver:
 
     def outcrypt(self, action):
         # this is a write to encrypt
-        if self.encrypt.stdin:
-            self.encrypt.stdin.write(action +'\n') #this the logger activation
-            self.encrypt.stdin.flush()
+        if self.encryptor.stdin:
+            self.encryptor.stdin.write(action +'\n') #this the logger activation
+            self.encryptor.stdin.flush()
                 
     def incrypt(self):        
         # this is a read from encrypt
-        if self.encrypt.stdout:
-            return self.encrypt.stdout.readline().strip() #this the logger activation
-        return None
+        if self.encryptor.stdout and self.encrypt:
+            return self.encryptor.stdout.readline().strip() #this the logger activation
+        return "Place holder for logger testing" #None
 
     def mainRun(self):
         while True:
-            print("Commands")
+            print("\nCommands")
             print("Password")
-            print("Incrypt")
+            print("Encrypt")
             print("Decrypt")
             print("History")
             print("Quit")
@@ -67,10 +69,13 @@ class Driver:
 
             if action == "QUIT":
                 self.log("ENDING PROGRAM")
+                if self.logger: # cleans up the pipe before ending the program
+                    self.logger.stdin.close()
+                    self.logger.terminate()
                 break
             elif action == "PASSWORD":
                 self.password()
-            elif action == "INCRYPT":
+            elif action == "ENCRYPT":
                 self.encrypt()
             elif action == "DECRYPT":
                 self.decrypt()
@@ -119,6 +124,9 @@ class Driver:
 
         if pword is None:
             return
+        
+        print(f"Password is {pword}")
+        """
         #senting down the outpipe to the encryptor
         self.outcrypt(f"PASSKEY {pword}")
 
@@ -126,3 +134,25 @@ class Driver:
         print(response)
 
         self.log(response)
+        """
+
+        self.log(f"PASSWORD SET")
+
+if __name__ == "__main__": # how program runs from the command line prompt 
+    
+    if len(sys.argv) !=2: # checks if the right amount of arguments are giving in the commandline
+        print("Wrong amount of Arguments")
+        print("Should be: python driver.py logFile.log")
+        sys.exit(1)
+    
+    logFile = sys.argv[1]
+    driver = Driver(logFile)
+
+    try:
+        driver.mainRun()
+    except KeyboardInterrupt:
+        print("\n Program Interruption")
+        driver.log("PROGRAM INTERRUPTED")
+    finally:# clean up
+        if driver.logger:
+            driver.logger.terminate()
