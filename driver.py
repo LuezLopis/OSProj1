@@ -10,7 +10,7 @@ class Driver:
         #creates the 2 pipe processes 
         self.init()
 
-        self.log("START Driver starting")
+        self.log("[START] Driver starting")
 
     def init(self):
         # prepares the pipes for the logger
@@ -46,14 +46,14 @@ class Driver:
 
     def outcrypt(self, action):
         # this is a write to encrypt
-        if self.encryptor.stdin:
-            self.encryptor.stdin.write(action +'\n') #this the logger activation
-            self.encryptor.stdin.flush()
+        if self.encrypt.stdin:
+            self.encrypt.stdin.write(action +'\n') #this the logger activation
+            self.encrypt.stdin.flush()
                 
     def incrypt(self):        
         # this is a read from encrypt
-        if self.encryptor.stdout and self.encrypt:
-            return self.encryptor.stdout.readline().strip() #this the logger activation
+        if self.encrypt.stdout and self.encrypt:
+            return self.encrypt.stdout.readline().strip() #this the logger activation
         return "Place holder for logger testing" #None
 
     def mainRun(self):
@@ -68,7 +68,7 @@ class Driver:
             action = input("Enter Command: ").strip().upper()
 
             if action == "QUIT":
-                self.log("ENDING PROGRAM")
+                self.log("[END] Program terminating")
                 if self.logger: # cleans up the pipe before ending the program
                     self.logger.stdin.close()
                     self.logger.terminate()
@@ -83,7 +83,7 @@ class Driver:
                 self.history()
             else:
                 print("Incorrect option")
-                self.log(f"INVALID COMMMAND: {action}")
+                self.log(f"[INVALID] COMMMAND INVALID: {action}")
 
     def selpass(self):
         # allows for access the history for passwords
@@ -91,8 +91,8 @@ class Driver:
             print("0 for new password string \n Else use Nums for specific past strings")
             
             for i, past in enumerate(self.hist, 1): # start the emnumaration at 1
-                print(f"{i} for {past}")
-            print(f" From 1 to {len(self.hist)}, {len(self.hist)+1} to Cancel")
+                print(f" -{i} for {past}")
+            print(f"{len(self.hist)+1} to Cancel")
             
             try: 
                 action = int(input("Choice: ")) # turns input into a int only
@@ -104,7 +104,7 @@ class Driver:
                     else:
                         print("Only Letters is allowed for Password")
             
-                elif action > 0 & action <= len(self.hist):
+                elif 0 < action <= len(self.hist):
                     return self.hist[action-1]
             
                 elif action == len(self.hist)+1:
@@ -117,7 +117,7 @@ class Driver:
                 print("Thats not an int pls try again")
 
     def password(self):
-        self.log("PASSWORD COMMAND")
+        self.log("[SELECTION] Selecting Password")
 
         print("Select what u want the Password to be")
         pword = self.selpass()
@@ -125,6 +125,8 @@ class Driver:
         if pword is None:
             return
         
+        self.hist.append(pword)
+
         print(f"Password is {pword}")
         """
         #senting down the outpipe to the encryptor
@@ -136,7 +138,15 @@ class Driver:
         self.log(response)
         """
 
-        self.log(f"PASSWORD SET")
+        self.log("[SET] Password Set")
+
+    def history(self):
+        self.log("[REVIEW] Pulling up History")
+        for line in self.hist:
+            print(line)
+
+    def encrypt():
+
 
 if __name__ == "__main__": # how program runs from the command line prompt 
     
