@@ -10,7 +10,7 @@ class Driver:
         #creates the 2 pipe processes 
         self.init()
 
-        self.log("DRIVER STARTED")
+        self.log("START Driver starting")
 
     def init(self):
         # prepares the pipes for the logger
