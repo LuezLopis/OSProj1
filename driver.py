@@ -26,7 +26,7 @@ class Driver:
             raise Exception("Logger failed to start")
         
         self.encryptor = subprocess.Popen(
-            ['./encryptor'],
+            ['python', 'encryptor.py'],
             stdin = subprocess.PIPE,
             stdout = subprocess.PIPE,
             stderr = subprocess.PIPE,
@@ -53,7 +53,7 @@ class Driver:
     def incrypt(self):        
         # this is a read from encrypt
         if self.encryptor.stdout and self.encryptor:
-            return self.encryptor.stdout.readline().strip() #this the logger activation
+            return self.encryptor.stdout.readline().strip() 
         return None
 
     def mainRun(self):
@@ -145,7 +145,7 @@ class Driver:
         for line in self.hist:
             print(line)
 
-    def encrypt():
+    #def encrypt():
 
 
 if __name__ == "__main__": # how program runs from the command line prompt 

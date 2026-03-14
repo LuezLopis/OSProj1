@@ -18,5 +18,5 @@ class Encryptor:
         self.pk = pk
         self.log("[SET] Passkey Set")
         
-    def encrypt(self):
+    #def encrypt(self):
         
