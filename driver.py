@@ -41,13 +41,13 @@ class Driver:
     def log(self, message):
         #pipes the messages to the logger
         if self.logger.stdin:
-            self.logger.stdin.write(message) #this the logger activation
+            self.logger.stdin.write(message + '\n') #this the logger activation
             self.logger.stdin.flush() # imediate send
 
     def outcrypt(self, action):
         # this is a write to encrypt
         if self.encryptor.stdin:
-            self.encryptor.stdin.write(action) #this the encryptor activation
+            self.encryptor.stdin.write(action + '\n') #this the encryptor activation
             self.encryptor.stdin.flush()
                 
     def incrypt(self):        
