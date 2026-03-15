@@ -8,9 +8,9 @@ class Encryptor:
 
     def setKey(self, pk):
         self.pk = pk.upper()
-        print(f"Input: PASSKEY {pk}")
+        #print(f"Input: PASSKEY {pk}")
         #self.log("[RESULT] Passkey Set")
-        return f"Output: RESULT"
+        return f"Output: RESULT Passkey Set"
     
     def encrypt(self, password):
         if self.pk is None:
@@ -51,8 +51,7 @@ class Encryptor:
         return f"RESULT {newpw}"
         
     def cmd(self, action):
-        action.upper()
-        a = action.split()
+        a = action.upper().split()
 
         if a[0] == "PASSKEY":
             return self.setKey(a[1])
@@ -80,7 +79,9 @@ def main():
             if response:
                 print(response)
                 sys.stdout.flush()
-            break # Ends after one command prompt
+            
+            if response == "QUIT":
+                break # Ends after one command prompt
 
         except KeyboardInterrupt:
             break
