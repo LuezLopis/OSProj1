@@ -1,5 +1,7 @@
 # OSProj1
 A tri-program that communicates to other programs via pipes
+start with cd \path\to\program
+then python driver.py with logFile.txt
 1. Driver.py - Holds the main cmds for user inputs with the following commands:
    - Password - sets a passkey for the encryptor
    - Encrypt - allows u to encrypt a string
