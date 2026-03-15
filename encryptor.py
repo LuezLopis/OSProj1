@@ -10,7 +10,7 @@ class Encryptor:
         self.pk = pk.upper()
         #print(f"Input: PASSKEY {pk}")
         #self.log("[RESULT] Passkey Set")
-        return f"Output: RESULT Passkey Set"
+        return "Output: RESULT Passkey Set"
     
     def encrypt(self, password):
         if self.pk is None:
@@ -29,7 +29,7 @@ class Encryptor:
                 shift -= 26
             newpw+=chr(shift + ord('A') - 1)
         
-        return f"RESULT {newpw}"
+        return f"Output: RESULT {newpw}"
     
     def decrypt(self, item):
         if self.pk is None:
@@ -48,10 +48,10 @@ class Encryptor:
                 shift += 26
             newpw+=chr(shift + ord('A') - 1)
         
-        return f"RESULT {newpw}"
+        return f"Output: RESULT {newpw}"
         
     def cmd(self, action):
-        a = action.upper().split()
+        a = action.upper().strip().split()
 
         if a[0] == "PASSKEY":
             return self.setKey(a[1])
@@ -61,6 +61,8 @@ class Encryptor:
             return self.decrypt(a[1])
         elif a[0] == "QUIT":
             return "QUIT"
+        else:
+            return f"ERROR Unknown CMD: {action}"
 
 
 def main():
