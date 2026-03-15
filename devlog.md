@@ -31,8 +31,22 @@
 - solution: popen is incorrect, it needs to be  Popen
 - as so completely forgot to add the command line read, the __main__ and argv read .... bruh
 - driver program runs, but it's hard to really tell if the logger is working properly, so imma just gonna add the filed output to logfile.log
-- small issue with the file.write as it is not appending the txt file
-- solution: used the wrong naming convenction for the log function, file as a parameter, then named the open function as file as well as opening "LogFile" which doesn't exist
-Thus, I swapped logFile with File and named the funct as f. Also dont need sys.flush() as I'm going to a file
-- logger has been completed so i will resume working on driver commands 
-- finishing the encryptor again
+- small issue with the file. Write as it is not appending the txt file
+- solution: used the wrong naming convention for the log function, file as a parameter, then named the open function as file as well as opening "LogFile" which doesn't exist
+Thus, I swapped logFile with File and named the function as f. Also, don't need sys.flush() as I'm going to a file
+- The logger has been completed, so I will resume working on driver commands
+- cleaned up some of my bound checker for the password selection function, as the cancel option was accessing the history, still causing out of bounds index error
+- starting the encryptor again
+- I think I set up the outcryotor and incrypt to receive and return the passkey properly, using them like inputand  output.
+- bad way to interpret pipes of encryptor, that is what the main loop is for, as it constantly reads and writes the pipes... rookie mistake T-T...
+- I'm using the uppercase for the standard wiht chr and ord for the ascii conversion of the letters then i think imma us join as it seems like the clean way to combine the list of chars
+  Either way i think im done with the encrypton and by proxy the decryption, as its just the reverse of the encryption.
+- Low key tired T-t
+#1820 Dinner Breakd
+- finshed the driver side of the encryption and decryption functions and also cleaned up the quit function to close the pipe for encryptor.py and logger.py
+- I ran in to a problem, when i choose the password option the terminal allows fo the input but after selecting the password the program stops.... -_-
+- SOLUTION: there was a break in my main loop of encryptor that didnt have its if statement, thus causing the function to stop after the passkey update......
+- problem is still persisting ....
+- I FOUND THE ISSSSSUUUUEEEE twas the removal of '\n' from the end of the stdout messages, as it prevented the logger from finding the end of the line
+- now im adding the final history additions and final tests
+- done i sleep now -_-.zZ
