@@ -104,7 +104,7 @@ class Driver:
                 if action == 0:
                     newpass = input("New Password (No spaces): ")
                     if newpass.isalpha():
-                        return newpass
+                        return newpass.upper()
                     else:
                         print("Only Letters is allowed for Password")
             
@@ -157,9 +157,7 @@ class Driver:
 
         if eword is None:
             return   
-        
-        self.hist.append(eword)
-
+    
         self.outcrypt(f"ENCRYPT {eword}")
         response = self.incrypt()
         print(response)
@@ -167,6 +165,8 @@ class Driver:
             self.log(f"[ERROR] {response}")
         else:
             self.log("[RESULT] Encrytion successful")
+            r = response.upper().strip().split()
+            self.hist.append(r[2])
 
     def decrypt(self):
         self.log("[SELECTION] Selecting string")
@@ -177,8 +177,6 @@ class Driver:
         if dword is None:
             return   
         
-        self.hist.append(dword)
-
         self.outcrypt(f"DECRYPT {dword}")
         response = self.incrypt()
         print(response)
@@ -186,6 +184,9 @@ class Driver:
             self.log(f"[ERROR] {response}")
         else:
             self.log("[RESULT] Decrytion successful")
+
+            r = response.upper().strip().split()
+            self.hist.append(r[2])
 
 if __name__ == "__main__": # how program runs from the command line prompt 
     

@@ -1,0 +1,20 @@
+2026-03-14 19:24 [START] Driver starting
+
+2026-03-14 19:24 [SELECTION] Selecting Password
+
+2026-03-14 19:24 [SET] Password Set
+
+2026-03-14 19:26 [SELECTION] Selecting Password
+
+2026-03-14 19:26 [RESULT] Encrytion successful
+
+2026-03-14 19:26 [SELECTION] Selecting string
+
+2026-03-14 19:26 [RESULT] Decrytion successful
+
+2026-03-14 19:27 [SELECTION] Selecting string
+
+2026-03-14 19:27 [RESULT] Decrytion successful
+
+2026-03-14 19:27 [REVIEW] Pulling up History
+
